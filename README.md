@@ -17,3 +17,8 @@
 pnpm add ai @ai-sdk/deepseek @ai-sdk/react
 ```
 ### 阿里云百炼获得key
+
+[阿里云百炼](https://ai.aliyun.com/)
+
+### 调用api
+

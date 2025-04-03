@@ -1,6 +1,7 @@
 "use client";
 import TextArea from "@/app/components/TextArea";
 import NavBar from "@/app/components/NavBar";
+
 import { useChat } from "@ai-sdk/react";
 
 const ChatPage = () => {

@@ -13,7 +13,7 @@ const TextArea = (props: {
   const [model, setModel] = useState("deepseek-r1");
 
   const handleModel = () => {
-    setModel(model === "deepseek-r1" ? "deepseek-r2" : "deepseek-r1");
+    setModel(model === "deepseek-r1" ? "deepseek-v3" : "deepseek-r1");
   };
   useEffect(() => {
     if (prop_model) {
@@ -44,7 +44,17 @@ const TextArea = (props: {
         >
           深度思考(R1)
         </div>
-        <div onClick={handleSubmit} className="shrink-0 rounded-full border border-gray-300 p-2 mr-4 cursor-pointer">
+        <div
+          onClick={() =>
+            handleSubmit &&
+            handleSubmit(undefined, {
+              body: {
+                model:model,
+              },
+            })
+          }
+          className="shrink-0 rounded-full border border-gray-300 p-2 mr-4 cursor-pointer"
+        >
           <EastIcon />{" "}
         </div>
       </div>
