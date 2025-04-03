@@ -24,7 +24,6 @@ const ThemeSwitch = () => {
   }
 
   const toggleTheme = themeList.find((item) => item.value === theme)?.value;
-  console.log(toggleTheme);
   return (
     <div className="border-1 flex flex-row pt-1 pb-1 pl-2 pr-2 justify-between rounded-md">
       {themeList.map((item, index) => {

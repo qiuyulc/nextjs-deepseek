@@ -1,6 +1,6 @@
 # AI小工具
 
-## 登陆
+### 登陆
 
 [clerk](https://clerk.com/docs)
 
@@ -14,5 +14,6 @@
 [ai](https://sdk.vercel.ai/)
 
 ```bash
-pnpm add ai @ai-sdk/deepseek
+pnpm add ai @ai-sdk/deepseek @ai-sdk/react
 ```
+### 阿里云百炼获得key

@@ -1,8 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import EastIcon from "@mui/icons-material/East";
-const TextArea = (props: { model?: string }) => {
-  const { model: prop_model } = props;
+import { UseChatHelpers } from "@ai-sdk/react";
+const TextArea = (props: {
+  model?: string;
+  input?: string;
+  handleInputChange?: UseChatHelpers["handleInputChange"];
+  handleSubmit?: UseChatHelpers["handleSubmit"];
+}) => {
+  const { model: prop_model, input, handleInputChange, handleSubmit } = props;
 
   const [model, setModel] = useState("deepseek-r1");
 
@@ -16,11 +22,13 @@ const TextArea = (props: { model?: string }) => {
   }, [prop_model]);
   return (
     <div className="w-full h-full flex shadow-[0px_0px_0px_.5px_#dce0e9] flex-col border border-gray-300 rounded-md">
-        {/* <div className="h-1/4 flex justify-between items-center">
+      {/* <div className="h-1/4 flex justify-between items-center">
             <h3 className="pl-2 pt-2 font-bold">这是一个demo</h3>
         </div> */}
       <div className="h-2/3">
         <textarea
+          value={input}
+          onChange={handleInputChange}
           className="w-full h-full p-2 pt-6 outline-none resize-none"
           placeholder="我能帮你做什么？"
         ></textarea>
@@ -36,7 +44,7 @@ const TextArea = (props: { model?: string }) => {
         >
           深度思考(R1)
         </div>
-        <div className="shrink-0 rounded-full border border-gray-300 p-2 mr-4 cursor-pointer">
+        <div onClick={handleSubmit} className="shrink-0 rounded-full border border-gray-300 p-2 mr-4 cursor-pointer">
           <EastIcon />{" "}
         </div>
       </div>
