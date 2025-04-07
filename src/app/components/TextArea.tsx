@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import EastIcon from "@mui/icons-material/East";
 import { UseChatHelpers } from "@ai-sdk/react";
+
 const TextArea = (props: {
   model?: string;
   input?: string;

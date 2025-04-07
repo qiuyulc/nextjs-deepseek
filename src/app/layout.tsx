@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -7,7 +6,7 @@ import { ThemeProvider } from "next-themes";
 // import { dark } from "@clerk/themes";
 import { ClerkProvider } from "@clerk/nextjs";
 import { zhCN } from "@clerk/localizations";
-
+import QueryClientProviderApp from "@/app/components/QueryClientProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,23 +29,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      localization={zhCN}
-      appearance={{
-        baseTheme: [],
-      }}
-    >
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex-row`}
-        >
-          <ThemeProvider attribute="data-mode">
-            <div className="w-screen h-screen">
-              <div className="">{children}</div>
-            </div>
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <QueryClientProviderApp>
+      <ClerkProvider
+        localization={zhCN}
+        appearance={{
+          baseTheme: [],
+        }}
+      >
+        <html lang="en" suppressHydrationWarning>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex-row`}
+          >
+            <ThemeProvider attribute="data-mode">
+              <div className="w-screen h-screen">
+                <div className="">{children}</div>
+              </div>
+            </ThemeProvider>
+          </body>
+        </html>
+      </ClerkProvider>
+    </QueryClientProviderApp>
   );
 }

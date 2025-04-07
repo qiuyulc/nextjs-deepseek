@@ -20,5 +20,24 @@ pnpm add ai @ai-sdk/deepseek @ai-sdk/react
 
 [阿里云百炼](https://ai.aliyun.com/)
 
-### 调用api
+### 数据存储
 
+[数据库](https://supabase.com/)
+
+[操作数据库](https://orm.drizzle.team/)
+
+```bash
+pnpm add drizzle-orm postgres dotenv
+pnpm add -D drizzle-kit tsx
+```
+
+.env
+```bash
+DATABASE_URL=
+```
+
+### 缓存数据
+
+```bash
+npm i @tanstack/react-query
+```
