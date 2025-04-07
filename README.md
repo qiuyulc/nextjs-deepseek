@@ -31,13 +31,23 @@ pnpm add drizzle-orm postgres dotenv
 pnpm add -D drizzle-kit tsx
 ```
 
-.env
-```bash
-DATABASE_URL=
-```
-
 ### 缓存数据
 
 ```bash
-npm i @tanstack/react-query
+pnpm i @tanstack/react-query
 ```
+
+### 处理markdown 样式 表格
+
+```bash
+pnpm i react-markdown react-syntax-highlighter remark-gfm
+```
+
+### 发布
+
+[vercel](https://vercel.com/)
+
+- 引入自己的githuab仓库
+- 配置环境变量
+    - Settings -> Environment Variables
+- 部署发布
