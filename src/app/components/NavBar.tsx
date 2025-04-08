@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ThemeSwitch from "./ThemeSwitch";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import { useUser } from "@clerk/nextjs";
@@ -7,13 +7,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter, usePathname } from "next/navigation";
 import axios from "axios";
 import User from "./User";
+import GradientCircularProgress from './Loading'
 
 import { CharModel } from "@/db/schema";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useUser();
   const router = useRouter();
-  const { data: chats } = useQuery({
+  const { data: chats, isPending } = useQuery({
     queryKey: ["chats"],
     queryFn: () => {
       return axios.post("/api/get-chats");
@@ -21,6 +22,37 @@ const NavBar = () => {
     enabled: !!user?.id,
   });
   const pathname = usePathname();
+
+  const navBarList = useMemo(() => {
+    if (isPending) {
+      return (
+        <div className="h-12 w-4/5 m-auto flex items-center justify-center">
+          <GradientCircularProgress />
+        </div>
+      );
+    }
+    return chats?.data.map((chat: CharModel) => {
+      return (
+        <div
+          className="h-12 w-4/5 cursor-pointer mb-1  m-auto flex items-center justify-center"
+          onClick={() => {
+            router.push(`/chat/${chat.id}`);
+          }}
+          key={chat.id}
+        >
+          <p
+            className={`h-full leading-12  w-full text-center line-clamp-1 ${
+              pathname === `/chat/${chat.id}`
+                ? "text-blue-700 dark:text-white-700 font-bold "
+                : ""
+            }`}
+          >
+            {chat.title}
+          </p>
+        </div>
+      );
+    });
+  }, [isPending, chats?.data, pathname, router]);
   return (
     <>
       <div
@@ -50,29 +82,7 @@ const NavBar = () => {
             <DehazeIcon />
           </div>
         </div>
-        <div className="grow">
-          {chats?.data.map((chat: CharModel) => {
-            return (
-              <div
-                className="h-12 w-4/5 cursor-pointer mb-1  m-auto flex items-center justify-center"
-                onClick={() => {
-                  router.push(`/chat/${chat.id}`);
-                }}
-                key={chat.id}
-              >
-                <p
-                  className={`h-full leading-12  w-full text-center line-clamp-1 ${
-                    pathname === `/chat/${chat.id}`
-                      ? "text-blue-700 dark:text-white-700 font-bold "
-                      : ""
-                  }`}
-                >
-                  {chat.title}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+        <div className="grow">{navBarList}</div>
         <div className="shrink-0 mb-2 w-4/5 m-auto">
           <User></User>
         </div>

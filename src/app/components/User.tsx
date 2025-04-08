@@ -3,7 +3,7 @@ import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
 export default function Page() {
   const { isSignedIn, user, isLoaded } = useUser();
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   if (!isSignedIn) {
